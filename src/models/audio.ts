@@ -16,6 +16,7 @@ export interface IAudio extends Document {
   playCount?: number;
   likes?: number;
   thumbnailUrl?: string;
+  formattedDuration?: string; // Add this line
 }
 
 const AudioSchema: Schema = new Schema({
@@ -105,8 +106,8 @@ AudioSchema.index({ isPublic: 1 });
 // Virtual for formatted duration
 AudioSchema.virtual('formattedDuration').get(function() {
   if (!this.duration) return null;
-  const minutes = Math.floor(this.duration / 60);
-  const seconds = this.duration % 60;
+  const minutes = Math.floor((this.duration as number) / 60);
+  const seconds = (this.duration as number) % 60;
   return `${minutes}:${seconds.toString().padStart(2, '0')}`;
 });
 

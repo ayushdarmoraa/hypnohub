@@ -163,8 +163,8 @@ PersonalizedRequestSchema.index({ requestDate: -1 });
 PersonalizedRequestSchema.index({ assignedTherapist: 1 });
 
 // Virtual for formatted amount
-PersonalizedRequestSchema.virtual('formattedAmount').get(function() {
-  return `$${this.amount.toFixed(2)}`;
+PersonalizedRequestSchema.virtual("formattedAmount").get(function() {
+  return `$${(this.amount as number).toFixed(2)}`;
 });
 
 // Virtual for urgency pricing
